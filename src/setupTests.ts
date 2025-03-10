@@ -1,2 +1,1 @@
-import "@testing-library/jest-dom/extend-expect";
-jest.useFakeTimers("modern");
+import '@testing-library/jest-dom/extend-expect';

@@ -1,11 +1,11 @@
-import { styled } from "styled-components";
-import BombItem from "./BombItem";
-import { Bomb } from "./types";
+import { styled } from 'styled-components';
+import BombItem from './BombItem';
+import { Bomb } from './types';
 
-const BombList: React.FC<Bomb[]> = ({ bombs }) => {
+const BombList = ({ bombs }: { bombs: Bomb[] }) => {
   return (
     <Wrapper>
-      {bombs.map((bomb) => (
+      {bombs.map((bomb: Bomb) => (
         <BombItem key={bomb.id} bomb={bomb} />
       ))}
     </Wrapper>

@@ -1,12 +1,17 @@
-import { styled } from "styled-components";
-import { Bomb } from "./types";
+import { styled } from 'styled-components';
+import { Bomb } from './types';
 
-const BombItem: React.FC<Bomb[]> = ({ bomb }) => {
+interface BombTimerProps {
+  //Using transitent props
+  $exploded: boolean;
+}
+
+const BombItem = ({ bomb }: { bomb: Bomb }) => {
   return (
     <Wrapper>
       <BombName>{bomb.name}</BombName>
-      <BombTimer exploded={bomb.exploded}>
-        {bomb.exploded ? "Exploded" : `${bomb.timeLeft} seconds`}
+      <BombTimer $exploded={bomb.exploded}>
+        {bomb.exploded ? 'Exploded' : `${bomb.timeLeft} seconds`}
       </BombTimer>
     </Wrapper>
   );
@@ -23,8 +28,8 @@ const Wrapper = styled.div`
 
 const BombName = styled.div``;
 
-const BombTimer = styled.div`
-  color: ${(props) => (props.exploded ? "red" : "")};
+const BombTimer = styled.div<BombTimerProps>`
+  color: ${({ $exploded }) => ($exploded ? 'red' : '')};
 `;
 
 export default BombItem;

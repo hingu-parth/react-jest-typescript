@@ -1,5 +1,6 @@
-import { ApiService } from "ApiService";
-import { useEffect, useState } from "react";
+import { ApiService } from 'ApiService';
+import { Bomb } from 'components/Bomb/types';
+import { useEffect, useState } from 'react';
 
 const useBombsData = () => {
   const [bombs, setBombs] = useState<Bomb[]>([]);

@@ -1,14 +1,6 @@
-import { Bomb } from "components/Bomb/types";
-import useBombsData from "hooks/useBombsData";
-import {
-  Children,
-  createContext,
-  FC,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { ApiService } from "./ApiService";
+import { Bomb } from 'components/Bomb/types';
+import useBombsData from 'hooks/useBombsData';
+import { createContext, FC, useContext } from 'react';
 
 export interface ContextProps {
   bombs: Bomb[];
@@ -25,7 +17,7 @@ export const ContextProviderComponent: FC = ({ children }) => {
   const bombsData = useBombsData();
 
   return (
-    <Context.Provider value={{ ...bombsData, footerInfo: "Copyright 2021" }}>
+    <Context.Provider value={{ ...bombsData, footerInfo: 'Copyright 2021' }}>
       {children}
     </Context.Provider>
   );
@@ -35,7 +27,7 @@ export const ContextProviderComponent: FC = ({ children }) => {
 export const useBombs = (): ContextProps => {
   const context = useContext(Context);
   if (context === undefined) {
-    throw new Error("useBombs must be used within a BombsProvider");
+    throw new Error('useBombs must be used within a BombsProvider');
   }
   return context;
 };

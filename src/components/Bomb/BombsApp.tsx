@@ -1,7 +1,12 @@
-import { useBombs } from "Context";
-import { useEffect, useState } from "react";
-import BombList from "./BombList";
-import { styled } from "styled-components";
+import { useBombs } from 'Context';
+import { useEffect, useState } from 'react';
+import BombList from './BombList';
+import { styled } from 'styled-components';
+
+interface ButtonProps {
+  //Using transient props
+  $allExploded: boolean;
+}
 
 const BombsApp = () => {
   const { bombs, setBombs, loading, error } = useBombs();
@@ -29,9 +34,9 @@ const BombsApp = () => {
   }, [started, allExploded, setBombs]);
 
   const getButtonText = () => {
-    if (!started) return "Explode";
-    if (allExploded) return "All bombs exploded";
-    return "Waiting to explode...";
+    if (!started) return 'Explode';
+    if (allExploded) return 'All bombs exploded';
+    return 'Waiting to explode...';
   };
 
   const handleBombs = () => setStarted(true);
@@ -43,11 +48,9 @@ const BombsApp = () => {
     <Wrapper>
       <BombList bombs={bombs} />
       <Button
-        role="button"
-        allExploded={allExploded}
+        $allExploded={allExploded}
         onClick={handleBombs}
         disabled={started && !allExploded}
-        aria-valuetext={getButtonText()}
       >
         {getButtonText()}
       </Button>
@@ -63,10 +66,10 @@ const Wrapper = styled.div`
   gap: 8px;
 `;
 
-const Button = styled.button`
+const Button = styled.button<ButtonProps>`
   width: 50%;
   border-radius: 6px;
-  background: ${(props) => (props.allExploded ? "red" : "purple")};
+  background: ${({ $allExploded }) => ($allExploded ? 'red' : 'purple')};
 `;
 
 export default BombsApp;
