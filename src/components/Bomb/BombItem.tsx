@@ -1,10 +1,5 @@
 import { styled } from 'styled-components';
-import { Bomb } from './types';
-
-interface BombTimerProps {
-  //Using transitent props
-  $exploded: boolean;
-}
+import { Bomb, BombTimerProps } from './types';
 
 const BombItem = ({ bomb }: { bomb: Bomb }) => {
   return (

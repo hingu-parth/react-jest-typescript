@@ -2,11 +2,7 @@ import { useBombs } from 'Context';
 import { useEffect, useState } from 'react';
 import BombList from './BombList';
 import { styled } from 'styled-components';
-
-interface ButtonProps {
-  //Using transient props
-  $allExploded: boolean;
-}
+import { ButtonProps } from './types';
 
 const BombsApp = () => {
   const { bombs, setBombs, loading, error } = useBombs();
@@ -41,8 +37,19 @@ const BombsApp = () => {
 
   const handleBombs = () => setStarted(true);
 
-  if (loading) return <div>Loading bombs...</div>;
-  if (error) return <div>Error loading bombs: {error.message}</div>;
+  if (loading)
+    return (
+      <Wrapper>
+        <Loading>Loading bombs...</Loading>
+      </Wrapper>
+    );
+
+  if (error)
+    return (
+      <Wrapper>
+        <Error>Error loading bombs: {error.message}</Error>
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
@@ -61,15 +68,38 @@ const BombsApp = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-item: center;
-  flex: 1;
+  align-items: center;
+  flex-direction: column;
   gap: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  margin: auto;
+  width: fit-content;
 `;
 
 const Button = styled.button<ButtonProps>`
-  width: 50%;
   border-radius: 6px;
+  width: 400px;
+  margin: 16px;
+  padding: 8px;
+  color: white;
+  border-color: transparent;
   background: ${({ $allExploded }) => ($allExploded ? 'red' : 'purple')};
+`;
+
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+`;
+
+const Error = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  width: fit-content;
 `;
 
 export default BombsApp;

@@ -7,7 +7,6 @@ export interface ContextProps {
   setBombs: React.Dispatch<React.SetStateAction<Bomb[]>>;
   loading: boolean;
   error: Error | null;
-  footerInfo: string;
 }
 
 const Context = createContext<ContextProps>({} as ContextProps);
@@ -17,9 +16,7 @@ export const ContextProviderComponent: FC = ({ children }) => {
   const bombsData = useBombsData();
 
   return (
-    <Context.Provider value={{ ...bombsData, footerInfo: 'Copyright 2021' }}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ ...bombsData }}>{children}</Context.Provider>
   );
 };
 

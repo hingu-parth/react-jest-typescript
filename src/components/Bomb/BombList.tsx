@@ -16,12 +16,9 @@ const Wrapper = styled.div`
   gap: 8px;
   display: flex;
   flex-direction: column;
-  width: 50%;
-  max-width: 500px;
+  width: 400px;
   justify-content: center;
   padding: 16px;
-  border: 1px solid lightgrey;
-  border-radius: 6px;
 `;
 
 export default BombList;
