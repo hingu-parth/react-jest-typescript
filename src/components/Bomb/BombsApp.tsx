@@ -1,5 +1,5 @@
 import { useBombs } from 'Context';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import BombList from './BombList';
 import { styled } from 'styled-components';
 import { ButtonProps } from './types';
@@ -9,7 +9,10 @@ const BombsApp = () => {
   const [started, setStarted] = useState<boolean>(false);
 
   // Determining if all bombs have exploded
-  const allExploded = bombs.every((bomb) => bomb.exploded);
+  const allExploded = useMemo(
+    () => bombs.every((bomb) => bomb.exploded),
+    [bombs]
+  );
 
   useEffect(() => {
     if (started && !allExploded) {
@@ -29,13 +32,13 @@ const BombsApp = () => {
     }
   }, [started, allExploded, setBombs]);
 
-  const getButtonText = () => {
+  const getButtonText = useCallback(() => {
     if (!started) return 'Explode';
     if (allExploded) return 'All bombs exploded';
     return 'Waiting to explode...';
-  };
+  }, [started, allExploded]);
 
-  const handleBombs = () => setStarted(true);
+  const handleBombs = useCallback(() => setStarted(true), []);
 
   if (loading)
     return (

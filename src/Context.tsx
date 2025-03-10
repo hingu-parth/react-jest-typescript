@@ -1,6 +1,6 @@
 import { Bomb } from 'components/Bomb/types';
 import useBombsData from 'hooks/useBombsData';
-import { createContext, FC, useContext } from 'react';
+import { createContext, FC, useContext, useMemo } from 'react';
 
 export interface ContextProps {
   bombs: Bomb[];
